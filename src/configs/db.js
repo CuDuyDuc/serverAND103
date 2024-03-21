@@ -1,7 +1,7 @@
 const { mongoose } = require('mongoose');
 require('dotenv').config();
 
-const dbUrl = process.env.MONGODB_URI || 'mongodb+srv://admin:phuocdaica624@cluster0.on1mfeq.mongodb.net/AssigmentAndroidAPI';
+const dbUrl = process.env.MONGODB_URI || 'mongodb+srv://duccu1403:1403@duyduc.ofsxxxi.mongodb.net/ASS_AND103';
 
 const connectDB = async () => {
     try {
