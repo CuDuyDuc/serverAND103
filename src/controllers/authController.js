@@ -29,19 +29,17 @@ const register = asyncHandle(async (req, res) => {
     if (existingEmail) {
         res.status(401).json({ message: 'Email đã được đăng ký' });
         throw new Error(`User has already exist!!!`)
-    } else {
-        const salt = await bcrypr.genSalt(10);
-        const hashedPassword = await bcrypr.hash(password, salt);
-        const newUser = new UserModel({
-            fullname,
-            email,
-            password: hashedPassword,
-            phone
-        });
-        await newUser.save();
-        res.status(200).json({ message: 'success', "data": newUser });
-
     }
+    const salt = await bcrypr.genSalt(10);
+    const hashedPassword = await bcrypr.hash(password, salt);
+    const newUser = new UserModel({
+        fullname,
+        email,
+        password: hashedPassword,
+        phone
+    });
+    await newUser.save();
+    res.status(200).json({ message: 'success', "data": newUser });
 
 
 });
@@ -96,16 +94,16 @@ const forgotPassword = asyncHandle(async (req, res) => {
                 message: 'Đã gửi mật khẩu mới vào Email của bạn!!!',
                 data: []
             })
-        }).catch((error)=>{
-            res.status(401).json({message:'Không thể gửi mật khẩu mới'})
+        }).catch((error) => {
+            res.status(401).json({ message: 'Không thể gửi mật khẩu mới' })
             throw new Error('Không thể gửi mật khẩu');
         })
-    }else{
-        res.status(401).json({message:'Không tìm thấy Email của bạn'});
+    } else {
+        res.status(401).json({ message: 'Không tìm thấy Email của bạn' });
         throw new Error('Không tìm thấy tài khoản!');
     }
 })
 
 module.exports = {
-    register, login,forgotPassword
+    register, login, forgotPassword
 }
